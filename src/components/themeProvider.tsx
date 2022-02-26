@@ -5,7 +5,15 @@ import { FC } from 'react';
 const theme = createTheme({
   palette: {
     primary: {
+      main: '#FFFFFF',
+    },
+    secondary: {
       main: green[500],
+    },
+  },
+  typography: {
+    button: {
+      textTransform: 'none',
     },
   },
 });
