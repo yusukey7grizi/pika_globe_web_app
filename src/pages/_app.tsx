@@ -1,6 +1,5 @@
-import { NavigationBar } from 'components/molecules';
+import { NavigationBar, BottomNavigation } from 'components/molecules';
 import { ThemeNesting } from 'components/themeProvider';
-import { BottomNavigation } from 'components/molecules/bottomNavigation';
 import { useMediaQuery } from '@mui/material';
 import { ScreenSize } from 'components/constants';
 import 'components/globals.css';
