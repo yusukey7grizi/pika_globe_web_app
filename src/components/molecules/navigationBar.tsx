@@ -4,7 +4,7 @@ import { TitleButton } from 'components/atoms';
 import { NavigationRoutes, ScreenSize } from 'components/constants';
 import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
-import { CustomSyntheticEvent } from 'types';
+import type { CustomSyntheticEvent } from 'types';
 
 const NavigationBar: FC = () => {
   const router = useRouter();
