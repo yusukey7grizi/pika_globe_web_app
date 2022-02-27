@@ -1,7 +1,3 @@
-import React from 'react';
-
-const index = () => {
-  return <div>index</div>;
-};
-
-export default index;
+export * from 'components/atoms/buttons';
+export * from 'components/atoms/layouts';
+export * from 'components/atoms/textFields';

@@ -1,7 +1,20 @@
+import { NavigationBar, BottomNavigation } from 'components/molecules';
+import { ThemeNesting } from 'components/themeProvider';
+import { useMediaQuery } from '@mui/material';
+import { ScreenSize } from 'components/constants';
+import 'components/globals.css';
 import type { AppProps } from 'next/app';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  const isIphoneSize = !useMediaQuery(ScreenSize.largerThanIphone);
+
+  return (
+    <ThemeNesting>
+      <NavigationBar />
+      <Component {...pageProps} />
+      {isIphoneSize && <BottomNavigation />}
+    </ThemeNesting>
+  );
 }
 
 export default MyApp;
