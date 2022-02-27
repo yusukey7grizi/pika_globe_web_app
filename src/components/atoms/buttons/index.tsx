@@ -13,6 +13,7 @@ const TitleButton: FC = () => {
       disableRipple
       variant='text'
       color='secondary'
+      sx={{ fontSize: '1.3rem' }}
     >
       Pika Globe
     </Button>

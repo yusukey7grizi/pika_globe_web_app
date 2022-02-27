@@ -1,15 +1,29 @@
-import { AppBar, Box, Tab, Tabs, Toolbar, useMediaQuery } from '@mui/material';
-import { styled } from '@mui/system';
+import {
+  AppBar,
+  Box,
+  IconButton,
+  InputAdornment,
+  Tab,
+  Tabs,
+  TextField,
+  Toolbar,
+  useMediaQuery,
+} from '@mui/material';
+import { styled, width } from '@mui/system';
 import { TitleButton } from 'components/atoms';
-import { NavigationRoutes, ScreenSize } from 'components/constants';
+import { Color, NavigationRoutes, ScreenSize } from 'components/constants';
 import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
 import type { CustomSyntheticEvent } from 'types';
+import SearchIcon from '@mui/icons-material/Search';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const NavigationBar: FC = () => {
   const router = useRouter();
-  const [path, setPath] = useState(router.asPath);
+  const [path, setPath] = useState<string>(router.asPath);
+
   const isLargerThanIphone = useMediaQuery(ScreenSize.largerThanIphone);
+  const isLargerThanIpad = useMediaQuery(ScreenSize.largerThanIpad);
 
   const handleChange = (
     _: CustomSyntheticEvent,
@@ -19,12 +33,58 @@ const NavigationBar: FC = () => {
     router.push(path);
   };
 
+  const ToolBarContent: FC = () => {
+    const [isSearchFieldOpen, setIsSearchFieldOpen] = useState<boolean>(false);
+
+    switch (true) {
+      case isLargerThanIpad:
+        return (
+          <>
+            <Wrapper>
+              <TitleButton />
+            </Wrapper>
+            <SearchField />
+          </>
+        );
+
+      case isSearchFieldOpen:
+        return (
+          <>
+            <IconButton
+              color='secondary'
+              onClick={() => {
+                setIsSearchFieldOpen(false);
+              }}
+            >
+              <ClearIcon />
+            </IconButton>
+            <SearchField />
+          </>
+        );
+
+      default:
+        return (
+          <>
+            <Wrapper>
+              <TitleButton />
+            </Wrapper>
+            <IconButton
+              color='secondary'
+              onClick={() => {
+                setIsSearchFieldOpen(true);
+              }}
+            >
+              <SearchIcon />
+            </IconButton>
+          </>
+        );
+    }
+  };
+
   return (
     <AppBar position='static'>
       <CustomToolBar>
-        <Wrapper>
-          <TitleButton />
-        </Wrapper>
+        <ToolBarContent />
       </CustomToolBar>
       {isLargerThanIphone && (
         <Wrapper>
@@ -52,4 +112,31 @@ const CustomToolBar = styled(Toolbar)({
   height: '4.6rem',
 });
 
+const SearchField: FC = () => {
+  return (
+    <TextField
+      size='small'
+      autoComplete='off'
+      placeholder='住所で検索する'
+      variant='filled'
+      sx={{
+        pl: '1rem',
+        pr: '1rem',
+        height: '2.5rem',
+        width: '20rem',
+      }}
+      InputProps={{
+        disableUnderline: true,
+        style: { height: '100%', width: '100%', fontSize: '0.9rem' },
+        endAdornment: (
+          <InputAdornment position='end'>
+            <IconButton color='secondary'>
+              <SearchIcon />
+            </IconButton>
+          </InputAdornment>
+        ),
+      }}
+    />
+  );
+};
 export { NavigationBar };
