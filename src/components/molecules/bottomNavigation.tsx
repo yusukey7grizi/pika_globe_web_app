@@ -7,6 +7,7 @@ import React, { FC, useState } from 'react';
 import HomeIcon from '@mui/icons-material/Home';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PersonIcon from '@mui/icons-material/Person';
+import AddLocationIcon from '@mui/icons-material/AddLocation';
 import { useRouter } from 'next/router';
 import { Color } from 'components/constants';
 
@@ -14,7 +15,9 @@ const BottomNavigation: FC = () => {
   const router = useRouter();
   const [currentPath, setCurrentPath] = useState(router.asPath);
 
-  const getColor = (value: '/' | '/favorites' | '/myPage'): string => {
+  const getColor = (
+    value: '/' | '/favorites' | '/myPage' | '/post'
+  ): string => {
     return currentPath === value ? Color.green : Color.gray;
   };
 
@@ -34,6 +37,17 @@ const BottomNavigation: FC = () => {
           <HomeIcon
             sx={{
               color: getColor('/'),
+            }}
+          />
+        }
+      />
+      <CustomBottomNavigationAction
+        value='/post'
+        label='投稿する'
+        icon={
+          <AddLocationIcon
+            sx={{
+              color: getColor('/post'),
             }}
           />
         }

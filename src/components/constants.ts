@@ -12,6 +12,7 @@ const ScreenSize = {
 
 const NavigationRoutes = [
   { path: '/', label: 'ホーム' },
+  { path: '/post', label: '投稿する' },
   { path: '/favorites', label: 'お気に入り' },
   { path: '/myPage', label: 'マイページ' },
 ] as const;
