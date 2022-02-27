@@ -2,6 +2,7 @@ const Color = {
   white: '#FFFFFF',
   green: '#4caf50',
   gray: '#767676',
+  red: '#d32f2f',
 } as const;
 
 const ScreenSize = {

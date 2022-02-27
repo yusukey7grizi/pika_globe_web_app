@@ -1,22 +1,25 @@
 import {
   AppBar,
   Box,
+  Button,
   IconButton,
-  InputAdornment,
   Tab,
   Tabs,
-  TextField,
   Toolbar,
   useMediaQuery,
 } from '@mui/material';
-import { styled, width } from '@mui/system';
-import { TitleButton } from 'components/atoms';
+import { styled } from '@mui/system';
+import {
+  FlexBox,
+  SearchField,
+  SearchFieldWithClearButton,
+  TitleButton,
+} from 'components/atoms';
 import { Color, NavigationRoutes, ScreenSize } from 'components/constants';
 import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
 import type { CustomSyntheticEvent } from 'types';
 import SearchIcon from '@mui/icons-material/Search';
-import ClearIcon from '@mui/icons-material/Clear';
 
 const NavigationBar: FC = () => {
   const router = useRouter();
@@ -44,22 +47,18 @@ const NavigationBar: FC = () => {
               <TitleButton />
             </Wrapper>
             <SearchField />
+            <FlexBox>
+              <Button color='secondary'>ログイン</Button>
+              <RegisterButton>新規登録</RegisterButton>
+            </FlexBox>
           </>
         );
 
       case isSearchFieldOpen:
         return (
-          <>
-            <IconButton
-              color='secondary'
-              onClick={() => {
-                setIsSearchFieldOpen(false);
-              }}
-            >
-              <ClearIcon />
-            </IconButton>
-            <SearchField />
-          </>
+          <SearchFieldWithClearButton
+            setIsSearchFieldOpen={setIsSearchFieldOpen}
+          />
         );
 
       default:
@@ -76,6 +75,12 @@ const NavigationBar: FC = () => {
             >
               <SearchIcon />
             </IconButton>
+            {isLargerThanIphone && (
+              <FlexBox>
+                <Button color='secondary'>ログイン</Button>
+                <RegisterButton>新規登録</RegisterButton>
+              </FlexBox>
+            )}
           </>
         );
     }
@@ -86,7 +91,7 @@ const NavigationBar: FC = () => {
       <CustomToolBar>
         <ToolBarContent />
       </CustomToolBar>
-      {isLargerThanIphone && (
+      {isLargerThanIphone ? (
         <Wrapper>
           <Tabs
             indicatorColor='secondary'
@@ -99,6 +104,14 @@ const NavigationBar: FC = () => {
             })}
           </Tabs>
         </Wrapper>
+      ) : (
+        <FlexBox sx={{ justifyContent: 'space-evenly' }}>
+          <h6>Pika Globeへようこそ！</h6>
+          <FlexBox sx={{ justifyContent: 'space-evenly' }}>
+            <Button color='secondary'>ログイン</Button>
+            <RegisterButton>新規登録</RegisterButton>
+          </FlexBox>
+        </FlexBox>
       )}
     </AppBar>
   );
@@ -112,31 +125,8 @@ const CustomToolBar = styled(Toolbar)({
   height: '4.6rem',
 });
 
-const SearchField: FC = () => {
-  return (
-    <TextField
-      size='small'
-      autoComplete='off'
-      placeholder='住所で検索する'
-      variant='filled'
-      sx={{
-        pl: '1rem',
-        pr: '1rem',
-        height: '2.5rem',
-        width: '20rem',
-      }}
-      InputProps={{
-        disableUnderline: true,
-        style: { height: '100%', width: '100%', fontSize: '0.9rem' },
-        endAdornment: (
-          <InputAdornment position='end'>
-            <IconButton color='secondary'>
-              <SearchIcon />
-            </IconButton>
-          </InputAdornment>
-        ),
-      }}
-    />
-  );
-};
+const RegisterButton = styled(Button)({
+  color: Color.red,
+});
+
 export { NavigationBar };
