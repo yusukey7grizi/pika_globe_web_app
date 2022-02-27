@@ -10,7 +10,6 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/system';
 import {
-  FlexBox,
   SearchField,
   SearchFieldWithClearButton,
   TitleButton,
@@ -105,9 +104,9 @@ const NavigationBar: FC = () => {
           </Tabs>
         </Wrapper>
       ) : (
-        <FlexBox sx={{ justifyContent: 'space-evenly' }}>
+        <FlexBox>
           <h6>Pika Globeへようこそ！</h6>
-          <FlexBox sx={{ justifyContent: 'space-evenly' }}>
+          <FlexBox>
             <Button color='secondary'>ログイン</Button>
             <RegisterButton>新規登録</RegisterButton>
           </FlexBox>
@@ -127,6 +126,11 @@ const CustomToolBar = styled(Toolbar)({
 
 const RegisterButton = styled(Button)({
   color: Color.red,
+});
+
+const FlexBox = styled('div')({
+  display: 'flex',
+  justifyContent: 'space-evenly',
 });
 
 export { NavigationBar };
