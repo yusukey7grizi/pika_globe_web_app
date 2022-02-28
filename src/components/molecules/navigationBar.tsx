@@ -47,8 +47,8 @@ const NavigationBar: FC = () => {
             </Wrapper>
             <SearchField />
             <FlexBox>
-              <Button color='secondary'>ログイン</Button>
-              <RegisterButton>新規登録</RegisterButton>
+              <LogInButton />
+              <RegisterButton />
             </FlexBox>
           </>
         );
@@ -76,8 +76,8 @@ const NavigationBar: FC = () => {
             </IconButton>
             {isLargerThanIphone && (
               <FlexBox>
-                <Button color='secondary'>ログイン</Button>
-                <RegisterButton>新規登録</RegisterButton>
+                <LogInButton />
+                <RegisterButton />
               </FlexBox>
             )}
           </>
@@ -107,8 +107,8 @@ const NavigationBar: FC = () => {
         <FlexBox>
           <h6>Pika Globeへようこそ！</h6>
           <FlexBox>
-            <Button color='secondary'>ログイン</Button>
-            <RegisterButton>新規登録</RegisterButton>
+            <LogInButton />
+            <RegisterButton />
           </FlexBox>
         </FlexBox>
       )}
@@ -124,13 +124,37 @@ const CustomToolBar = styled(Toolbar)({
   height: '4.6rem',
 });
 
-const RegisterButton = styled(Button)({
-  color: Color.red,
-});
-
 const FlexBox = styled('div')({
   display: 'flex',
   justifyContent: 'space-evenly',
 });
+
+const LogInButton: FC = () => {
+  const router = useRouter();
+  return (
+    <Button
+      onClick={() => {
+        router.push('/auth/logIn');
+      }}
+      color='secondary'
+    >
+      ログイン
+    </Button>
+  );
+};
+
+const RegisterButton: FC = () => {
+  const router = useRouter();
+  return (
+    <Button
+      onClick={() => {
+        router.push('/auth/register');
+      }}
+      sx={{ color: Color.red }}
+    >
+      新規登録
+    </Button>
+  );
+};
 
 export { NavigationBar };
