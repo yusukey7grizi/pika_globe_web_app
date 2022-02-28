@@ -9,6 +9,7 @@ const theme = createTheme({
     },
     secondary: {
       main: green[500],
+      dark: green[600],
     },
   },
   typography: {
